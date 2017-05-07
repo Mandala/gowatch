@@ -84,6 +84,11 @@ func startTask() {
 		return
 	}
 	task = t
+	go func() {
+		if err := t.Wait(); err != nil {
+			fmt.Printf("ERROR - StartTaskDaemon, %s.\n", err.Error())
+		}
+	}()
 }
 
 func cleanTask() {
@@ -107,6 +112,7 @@ func rebuildTask() {
 	c.Stdout = os.Stdout
 	if err := c.Run(); err != nil {
 		fmt.Printf("ERROR - RebuildTask, %s.\n", err.Error())
+		return
 	}
 	// Start task
 	startTask()
@@ -138,5 +144,6 @@ func main() {
 	fmt.Printf(" --- interrupt ---\n")
 	// Do watcher cleanup operation
 	fmt.Printf("INFO  - Terminating watcher.\n")
+	cleanTask()
 	watcher.Stop()
 }
