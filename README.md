@@ -4,8 +4,7 @@ Gowatch
 Watch for source code changes, then automatically rebuild and run your Golang
 project.
 
-This project is currently working on **OSX only**. Windows, Linux, and BSD
-development is planned.
+This project is currently working on **OSX only**.
 
 ## Usage
 
